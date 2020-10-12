@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { IIngredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { IRecipe } from './recipe.model';
 
 @Injectable()
 export class RecipeService {
-  readonly recipeSelected: Subject<IRecipe> = new Subject();
-
   private recipes: IRecipe[] = [
     { 
       name: 'A Test Recipe', 
@@ -35,10 +32,6 @@ export class RecipeService {
 
   getRecipe(id: number): IRecipe {
     return this.recipes[id];
-  }
-
-  selectRecipe(recipe: IRecipe) {
-    this.recipeSelected.next(recipe);
   }
 
   addIngredientsToShoppingList(ingredients: IIngredient[]) {
