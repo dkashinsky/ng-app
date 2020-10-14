@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService, SignupResponseData } from './auth.service';
 
@@ -12,7 +13,7 @@ export class AuthComponent implements OnInit {
   isLoading: boolean = false;
   error: string = null;
 
-  constructor(private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -33,14 +34,13 @@ export class AuthComponent implements OnInit {
       
     this.isLoading = true;
     auth$.subscribe({
-      next: (authData) => {
-        console.log(authData);
+      next: () => {
+        this.router.navigate(['/recipes']);
         this.isLoading = false;
-        form.reset();
       },
       error: (errorMessage) => {
-        this.isLoading = false;
         this.error = errorMessage;
+        this.isLoading = false;
       }
     });
   }
