@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { User } from './user.model';
 
 export interface SignupResponseData {
@@ -30,7 +31,7 @@ const errorMessages = {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiKey: string = 'AIzaSyApFH6EtkszV05xXujCtCneJjASx90bQDo';
+  private apiKey: string = environment.firebaseAPIKey;
   private userSubject: BehaviorSubject<User> = new BehaviorSubject(null);
   private tokenExpirationTimer: any;
 
